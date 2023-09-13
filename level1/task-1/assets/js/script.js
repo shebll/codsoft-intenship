@@ -22,13 +22,27 @@ let addEventElements = function (elements, eventType, callBack) {
 let navbar = document.querySelector(".navbar");
 let navbarBtnToggles = document.querySelectorAll(".nav-toggle-btn");
 let overlay = document.querySelector(".overlay");
-
+let links = document.querySelectorAll(".navbar-list li");
+// console.log(links);
 let toggleNav = function () {
   navbar.classList.toggle("active");
   overlay.classList.toggle("active");
   document.body.classList.toggle("nav-active");
 };
 addEventElements(navbarBtnToggles, "click", toggleNav);
+let isMobile = window.matchMedia("(pointer:coarse)").matches;
+console.log(isMobile);
+if (isMobile) {
+  addEventElements(links, "click", toggleNav);
+}
+links.forEach((link) => {
+  link.addEventListener("click", () => {
+    links.forEach((link) => {
+      link.querySelector("a").classList.remove("active");
+    });
+    link.querySelector("a").classList.toggle("active");
+  });
+});
 /////// navbar toggle ////////
 //////////////header sticky////////////
 let header = document.querySelector("header.header");
